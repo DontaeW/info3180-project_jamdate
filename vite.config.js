@@ -11,6 +11,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  define: {
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
+  },
   server: {
     proxy: {
       '^/api*': {
@@ -18,5 +21,9 @@ export default defineConfig({
         changeOrigin: true
       }
     }
-  }
+  },
+  build: {
+    outDir: "app/static",
+    emptyOutDir: true,
+  } 
 })

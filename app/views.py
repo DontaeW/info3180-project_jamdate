@@ -59,7 +59,7 @@ def update_user(user_id):
 
 @app.route('/')
 def index():
-    return jsonify(message="This is the beginning of our API")
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/users/<int:user_id>', methods=['GET'])
 @login_required
