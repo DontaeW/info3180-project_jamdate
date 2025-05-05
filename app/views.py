@@ -61,6 +61,10 @@ def update_user(user_id):
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
+@app.route('/assets/<path:filename>')
+def assets(filename):
+    return send_from_directory(os.path.join(app.static_folder, 'assets'), filename)
+
 @app.route('/api/users/<int:user_id>', methods=['GET'])
 @login_required
 def get_user(user_id):
