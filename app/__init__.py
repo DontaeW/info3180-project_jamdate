@@ -29,7 +29,7 @@ app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['REMEMBER_COOKIE_SECURE'] = False
 app.config['REMEMBER_COOKIE_HTTPONLY'] = True
 
-app.config['SERVER_NAME'] = 'localhost:5001'
+app.config['SERVER_NAME'] = 'info3180-project-jamdate-9maa.onrender.com'
 
 @login_manager.request_loader
 def load_user_from_request(request):
