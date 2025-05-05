@@ -57,9 +57,9 @@ def update_user(user_id):
         db.session.rollback()
         return jsonify({'error': str(e)}), 400
 
-@app.route('/')
+@app.route("/")
 def index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return render_template("index.html")
 
 @app.route('/assets/<path:filename>')
 def assets(filename):
