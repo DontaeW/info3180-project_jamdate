@@ -50,7 +50,7 @@ const profile = ref(null);
 const error = ref('');
 const isFavorited = ref(false);
 
-const backendBaseUrl = 'http://localhost:5001';
+const backendBaseUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
 
 async function fetchProfile() {
   const token = authStore.token;
