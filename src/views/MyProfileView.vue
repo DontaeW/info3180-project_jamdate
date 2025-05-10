@@ -26,10 +26,18 @@
         <h3>{{ profile.name }}</h3>
         <p><strong>Parish:</strong> {{ profile.parish }}</p>
         <p><strong>Biography:</strong> {{ profile.biography }}</p>
-        <button @click="viewProfile(profile.id)" class="action-button">View Profile</button>
-        <button @click="findMatches(profile.id)" class="action-button">Match Me</button>
-        <button @click="deleteProfile(profile.id)" class="delete-button">🗑️</button>
-        <button @click="editProfile(profile.id)" class="action-button">Edit</button>
+        <div class="button-group">
+          <button @click="viewProfile(profile.id)" class="action-button">View</button>
+          <button @click="editProfile(profile.id)" class="action-button">Edit</button>
+          <!-- <button @click="findMatches(profile.id)" class="action-button">Match</button> -->
+          <button 
+            @click="deleteProfile(profile.id)" 
+            class="delete-button"
+            :disabled="deleting"
+          >
+            {{ deleting ? '⌛' : '🗑️' }}
+          </button>
+        </div>
       </div>
     </div>
     <p v-else>No profiles found.</p>
@@ -126,6 +134,67 @@ function editUserProfile(userId) {
 
 function formatDate(dateString) {
   return new Date(dateString).toLocaleDateString();
+}
+
+
+async function deleteProfile(profileId) {
+  if (!profileId) {
+    error.value = "Invalid profile ID.";
+    return;
+  }
+
+  if (!confirm("Are you sure you want to delete this profile? This action cannot be undone.")) {
+    return;
+  }
+
+  try {
+    error.value = ""; // Clear previous errors
+    warning.value = "";
+    
+    const response = await fetch(`${backendBaseUrl}/api/profiles/${profileId}`, {
+      method: "DELETE",
+      headers: { 
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to delete profile');
+    }
+
+    // Success - update UI
+    profiles.value = profiles.value.filter(profile => profile.id !== profileId);
+    warning.value = "Profile deleted successfully";
+    
+    // Clear success message after 3 seconds
+    setTimeout(() => warning.value = "", 3000);
+    
+  } catch (err) {
+    error.value = err.message;
+    console.error("Delete profile error:", err);
+  }
+
+
+  const deleting = ref(false);
+
+async function deleteProfile(profileId) {
+  if (deleting.value) return;
+  
+  // ... existing checks ...
+  
+  try {
+    deleting.value = true;
+    // ... existing delete logic ...
+  } catch (err) {
+    // ... existing error handling ...
+  } finally {
+    deleting.value = false;
+  }
+}
 }
 </script>
 

@@ -567,3 +567,27 @@ def get_matches(profile_id):
         return jsonify({"error": "Invalid token"}), 401
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+
+@app.route('/api/profiles/<int:profile_id>', methods=['DELETE'])
+@login_required
+def delete_profile(profile_id):
+    profile = Profile.query.get_or_404(profile_id)
+    if profile.user_id_fk != current_user.id:
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    try:
+        # First delete any favorites associated with this profile
+        Favourite.query.filter(
+            (Favourite.user_id_fk == profile.user_id_fk) |
+            (Favourite.fav_user_id_fk == profile.user_id_fk)
+        ).delete()
+        
+        # Then delete the profile
+        db.session.delete(profile)
+        db.session.commit()
+        return jsonify({'message': 'Profile deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
