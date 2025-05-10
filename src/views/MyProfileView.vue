@@ -27,7 +27,7 @@
         <p><strong>Parish:</strong> {{ profile.parish }}</p>
         <p><strong>Biography:</strong> {{ profile.biography }}</p>
         <div class="button-group">
-          <button @click="viewProfile(profile.id)" class="action-button">View</button>
+          <button @click="viewProfile(profile.id)" class="action-button">Show Details</button>
           <button @click="editProfile(profile.id)" class="action-button">Edit</button>
           <!-- <button @click="findMatches(profile.id)" class="action-button">Match</button> -->
           <button 
