@@ -5,6 +5,7 @@ import MyProfileView from '../views/MyProfileView.vue'
 import CreateProfileView from '../views/CreateProfileView.vue'
 import LoginForm from '../components/LoginForm.vue'
 import SignUpForm from '../components/SignUpForm.vue'
+import MatchProfilesView from '../views/MatchProfilesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,6 +73,11 @@ const router = createRouter({
       name: 'matchReport',
       component: () => import('../views/MatchProfilesView.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/profiles/:id/matches',
+      name: 'matchReport',
+      component: MatchProfilesView
     }
   ]
 })
