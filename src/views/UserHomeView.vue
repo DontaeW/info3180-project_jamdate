@@ -31,8 +31,8 @@
 
         <section class="profiles">
       <div class="profile-card" v-for="profile in profiles" :key="profile.id">
-        <!-- <img :src="profile.photo ? `http://localhost:5001/api/photo/${profile.photo}` : '/default-profile.png'" alt="Profile" class="profile-image"> -->
-        <img :src='profile.photo' alt="Profile" class="profile-image">
+        <img :src="profile.photo ? `api/photo/${profile.photo}` : '/default-profile.png'" alt="Profile" class="profile-image">
+        
         <div class="profile-info">
           <div class="profile-name">
             {{ profile.name }}
