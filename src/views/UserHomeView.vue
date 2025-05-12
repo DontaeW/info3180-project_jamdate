@@ -31,13 +31,14 @@
 
         <section class="profiles">
       <div class="profile-card" v-for="profile in profiles" :key="profile.id">
-        <img :src="profile.photo ? `http://localhost:5001/api/photo/${profile.photo}` : '/default-profile.png'" alt="Profile" class="profile-image">
+        <!-- <img :src="profile.photo ? `http://localhost:5001/api/photo/${profile.photo}` : '/default-profile.png'" alt="Profile" class="profile-image"> -->
+        <img :src='profile.photo' alt="Profile" class="profile-image">
         <div class="profile-info">
           <div class="profile-name">
             {{ profile.name }}
-            <!-- <button class="heart" v-if="authStore.isLoggedIn" @click="toggleFavorite(profile)">
+            <button class="heart" v-if="authStore.isLoggedIn" @click="toggleFavorite(profile)">
               <span :class="{ favorited: profile.favorited }">♥</span>
-            </button> -->
+            </button>
           </div>
           <div class="actions">
             <router-link :to="{ name: 'profileDetail', params: { id: profile.id } }" class="view-more" replace>View more details</router-link>

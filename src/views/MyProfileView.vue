@@ -45,7 +45,9 @@
     <h2>My Favorites</h2>
     <div v-if="favorites.length" class="favorites-container">
       <div v-for="fav in favorites" :key="fav.id" class="fav-card">
-        <img :src="fav.photo ? `${backendBaseUrl}/api/photo/${fav.photo}` : '/default-profile.png'" 
+        <!-- <img :src="fav.photo ? `${backendBaseUrl}/api/photo/${fav.photo}` : '/default-profile.png'" 
+             alt="Favorite User Photo" class="profile-photo" /> -->
+             <img :src="fav.photo ? `${backendBaseUrl}/api/photo/${fav.photo}` : '/default-profile.png'" 
              alt="Favorite User Photo" class="profile-photo" />
         <h3>{{ fav.name }}</h3>
         <p><strong>Username:</strong> {{ fav.username }}</p>
