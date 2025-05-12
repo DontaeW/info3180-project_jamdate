@@ -62,12 +62,12 @@ const router = createRouter({
       component: () => import('../views/EditProfileView.vue'),
       meta: { requiresAuth: true }
     },
-    {
-      path: '/edit-user-profile/:id',
-      name: 'editUserProfile',
-      component: () => import('../views/EditUserProfileView.vue'),
-      meta: { requiresAuth: true }
-    },
+    // {
+    //   path: '/edit-user-profile/:id',
+    //   name: 'editUserProfile',
+    //   component: () => import('../views/EditUserProfileView.vue'),
+    //   meta: { requiresAuth: true }
+    // },
     {
       path: '/profiles/matches/:id',
       name: 'matchReport',
